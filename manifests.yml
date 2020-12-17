@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: dev
+  labels:
+    app: test
+  name: test
+spec:
+  containers:
+  - image: nginx
+    name: test
+    ports:
+    - containerPort: 80
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev
+  labels:
+    app: test
+  name: test
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  type: NodePort
+  selector:
+    app: test
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test
+  namespace: dev
+  annotations:
+    alb.ingress.kubernetes.io/group.name: dev-ingress
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    external-dns.alpha.kubernetes.io/hostname: test.dev.alle.com
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+  - host: test.dev.alle.com
+    http:
+      paths:
+      - backend:
+          serviceName: test
+          servicePort: 80
+        path: /*
