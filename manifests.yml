@@ -31,6 +31,22 @@ spec:
   selector:
     app: test
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: dev
+  labels:
+    app: test
+  name: test-preview
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  type: NodePort
+  selector:
+    app: test
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
