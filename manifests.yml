@@ -8,7 +8,7 @@ metadata:
   name: test
 spec:
   containers:
-  - image: httpd
+  - image: nginx
     name: test
     ports:
     - containerPort: 80
