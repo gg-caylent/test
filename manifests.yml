@@ -51,3 +51,25 @@ spec:
           serviceName: test
           servicePort: 80
         path: /*
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-preview
+  namespace: dev
+  annotations:
+    alb.ingress.kubernetes.io/group.name: dev-ingress
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    external-dns.alpha.kubernetes.io/hostname: test-preview.dev.alle.com
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+  - host: test-preview.dev.alle.com
+    http:
+      paths:
+      - backend:
+          serviceName: test
+          servicePort: 80
+        path: /*
+
