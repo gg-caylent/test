@@ -69,7 +69,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: test
+          serviceName: test-preview
           servicePort: 80
         path: /*
 
