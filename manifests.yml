@@ -40,11 +40,11 @@ metadata:
     alb.ingress.kubernetes.io/group.name: dev-ingress
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
-    external-dns.alpha.kubernetes.io/hostname: test.dev.alle.com
+    external-dns.alpha.kubernetes.io/hostname: test.eks.caylent.net
     kubernetes.io/ingress.class: alb
 spec:
   rules:
-  - host: test.dev.alle.com
+  - host: test.eks.caylent.net
     http:
       paths:
       - backend:
@@ -61,15 +61,14 @@ metadata:
     alb.ingress.kubernetes.io/group.name: dev-ingress
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
     alb.ingress.kubernetes.io/scheme: internet-facing
-    external-dns.alpha.kubernetes.io/hostname: test-preview.dev.alle.com
+    external-dns.alpha.kubernetes.io/hostname: test-preview.eks.caylent.net
     kubernetes.io/ingress.class: alb
 spec:
   rules:
-  - host: test-preview.dev.alle.com
+  - host: test-preview.eks.caylent.net
     http:
       paths:
       - backend:
           serviceName: test-preview
           servicePort: 80
         path: /*
-
