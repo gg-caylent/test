@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: test
-        image: nginx
+        image: httpd
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -23,4 +23,4 @@ spec:
     blueGreen:
       activeService: test
       previewService: test-preview
-      autoPromotionEnabled: false
+      autoPromotionEnabled: true
